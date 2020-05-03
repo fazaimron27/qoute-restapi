@@ -34,4 +34,23 @@ class QuoteController extends Controller
     {
         return new QuoteResource($quote);
     }
+
+    public function update(Request $request, Quote $quote)
+    {
+        $this->validate($request, [
+            'message' => 'required'
+        ]);
+
+        $this->authorize('update', $quote);
+
+        $quote->update([
+            'message' => $request->message
+        ]);
+
+        return (new QuoteResource($quote))->additional([
+            'meta' => [
+                'updated' => $quote->updated_at->diffForHumans()
+            ]
+        ]);
+    }
 }

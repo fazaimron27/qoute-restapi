@@ -41,4 +41,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Quote::class);
     }
+
+    public function ownsQuote(Quote $quote)
+    {
+        return auth()->id() === $quote->user->id;
+    }
 }
