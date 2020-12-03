@@ -53,4 +53,15 @@ class QuoteController extends Controller
             ]
         ]);
     }
+
+    public function destroy(Quote $quote)
+    {
+        $this->authorize('delete', $quote);
+
+        $quote->delete();
+
+        return response()->json([
+            'message' => 'Quote Deleted',
+        ]);
+    }
 }

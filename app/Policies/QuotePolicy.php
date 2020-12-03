@@ -14,4 +14,9 @@ class QuotePolicy
     {
         return $user->ownsQuote($quote);
     }
+
+    public function delete(User $user, Quote $quote)
+    {
+        return $user->ownsQuote($quote);
+    }
 }
